@@ -49,6 +49,14 @@ h1 {
 	margin-left: 54%;
 	margin-bottom: 0px;
 	margin-top: 15px;
+	font-size: 30px;
+	display: flex;
+	justify-content: end;
+	padding: 0px 5px;
+	align-items: center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .buttons-layout {
@@ -74,6 +82,14 @@ h1 {
 	cursor: pointer;
 }
 
+.clear:hover {
+	background-color: red;
+}
+
+.del:hover {
+	background-color: cyan;
+}
+
 .digits-layout {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
@@ -91,6 +107,17 @@ h1 {
 }
 
 .operators {
+	height: 95px;
+	border: 3px solid black;
+	font-family: Helvetica, sans-serif;
+	text-align: center;
+	font-size: 2rem;
+	margin: 5px 5px;
+	line-height: 95px;
+	cursor: pointer;
+}
+
+.evaluate {
 	height: 95px;
 	border: 3px solid black;
 	font-family: Helvetica, sans-serif;

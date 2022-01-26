@@ -4,6 +4,8 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: Helvetica, sans-serif;
+	user-select: none;
 }
 
 body {
@@ -21,7 +23,7 @@ h1 {
 }
 
 .calculator--box {
-	height: 900px;
+	height: 950px;
 	width: 600px;
 	border: 3px solid black;
 	border-radius: 10px;
@@ -32,6 +34,21 @@ h1 {
 	height: 100px;
 	border: 3px solid black;
 	margin: 20px auto;
+	font-size: 50px;
+	display: flex;
+	justify-content: end;
+	line-height: 120px;
+	padding: 0px 15px;
+}
+
+.mini {
+	width: 250px;
+	height: 50px;
+	border: 3px solid black;
+	margin-right: 0px;
+	margin-left: 54%;
+	margin-bottom: 0px;
+	margin-top: 15px;
 }
 
 .buttons-layout {
@@ -63,6 +80,17 @@ h1 {
 }
 
 .digits {
+	height: 95px;
+	border: 3px solid black;
+	font-family: Helvetica, sans-serif;
+	text-align: center;
+	font-size: 2rem;
+	margin: 5px 5px;
+	line-height: 95px;
+	cursor: pointer;
+}
+
+.operators {
 	height: 95px;
 	border: 3px solid black;
 	font-family: Helvetica, sans-serif;

@@ -72,7 +72,7 @@ ops.forEach((op) => {
 });
 
 evaluate.addEventListener("click", () => {
-	mini.innerText += output.innerText + "=";
+	mini.innerText = output.innerText + "=";
 	b = parseFloat(output.innerText);
 	if (operation == "+") {
 		output.innerText = add(a, b);

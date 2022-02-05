@@ -25,8 +25,10 @@ function power(a, b) {
 }
 //square-root
 function root(a, b) {
-	return Math.pow(a, 1 / b);
+	return Math.pow(a, parseInt(1 / b));
 }
+
+let flagEval = 0;
 
 let inputDigits = document.querySelectorAll(".digits");
 
@@ -62,29 +64,38 @@ let evaluate = document.querySelector(".evaluate");
 let a = 0;
 let b = 0;
 let operation;
+let flagOp = 0;
 ops.forEach((op) => {
 	op.addEventListener("click", () => {
-		operation = op.innerText;
-		mini.innerText = output.innerText + op.innerText;
-		a = parseFloat(output.innerText);
-		output.innerText = "";
+		if (flagOp < 1) {
+			operation = op.innerText;
+			mini.innerText = output.innerText + op.innerText;
+			a = parseFloat(output.innerText);
+			output.innerText = "";
+			flagOp++;
+			flagEval = 1;
+		}
 	});
 });
 
 evaluate.addEventListener("click", () => {
-	mini.innerText = output.innerText + "=";
-	b = parseFloat(output.innerText);
-	if (operation == "+") {
-		output.innerText = add(a, b);
-	} else if (operation == "−") {
-		output.innerText = subtract(a, b);
-	} else if (operation == "x") {
-		output.innerText = multiply(a, b);
-	} else if (operation == "/") {
-		output.innerText = divide(a, b);
-	} else if (operation == "^") {
-		output.innerText = power(a, b);
-	} else if (operation == "√") {
-		output.innerText = root(b, a);
+	if (flagEval < 2) {
+		mini.innerText = output.innerText + "=";
+		b = parseFloat(output.innerText);
+		if (operation == "+") {
+			output.innerText = add(a, b);
+		} else if (operation == "−") {
+			output.innerText = subtract(a, b);
+		} else if (operation == "x") {
+			output.innerText = multiply(a, b);
+		} else if (operation == "/") {
+			output.innerText = divide(a, b);
+		} else if (operation == "^") {
+			output.innerText = power(a, b);
+		} else if (operation == "√") {
+			output.innerText = root(b, a);
+		}
+		flagOp = 0;
+		flagEval++;
 	}
 });

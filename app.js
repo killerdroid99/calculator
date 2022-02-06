@@ -1,7 +1,7 @@
 let output = document.querySelector(".display");
 let mini = document.querySelector(".mini");
 
-//max digits = 12
+//max digits = 15
 
 //add
 function add(a, b) {
@@ -29,15 +29,24 @@ function root(a, b) {
 }
 
 let flagEval = 0;
+let flagDec = 0;
 
 let inputDigits = document.querySelectorAll(".digits");
 
 inputDigits.forEach((digit) => {
 	digit.addEventListener("click", () => {
-		if (output.innerText == 0) {
-			output.innerText = digit.innerText;
+		if (output.innerText === "0") {
+			if (digit.innerText === ".") {
+				output.innerText += digit.innerText;
+				flagDec = 1;
+			} else output.innerText = digit.innerText;
 		} else {
-			output.innerText += digit.innerText;
+			if (flagDec < 1 && digit.innerText === ".") {
+				output.innerText += digit.innerText;
+				flagDec = 1;
+			} else if (digit.innerText !== ".") {
+				output.innerText += digit.innerText;
+			}
 		}
 	});
 });
@@ -46,6 +55,9 @@ let del = document.querySelector(".del");
 
 del.addEventListener("click", () => {
 	output.innerText = output.innerText.slice(0, output.innerText.length - 1);
+	if (output.innerText[output.innerText.length - 1] === ".") {
+		flagDec = 0;
+	}
 	if (output.innerText.length === 0) {
 		output.innerText = "0";
 	}
@@ -56,6 +68,7 @@ let clr = document.querySelector(".clear");
 clr.addEventListener("click", () => {
 	output.innerText = "0";
 	mini.innerText = "";
+	flagDec = 0;
 });
 
 let ops = document.querySelectorAll(".operators");
@@ -71,9 +84,10 @@ ops.forEach((op) => {
 			operation = op.innerText;
 			mini.innerText = output.innerText + op.innerText;
 			a = parseFloat(output.innerText);
-			output.innerText = "";
+			output.innerText = "0";
 			flagOp++;
 			flagEval = 1;
+			flagDec = 0;
 		}
 	});
 });
@@ -116,9 +130,19 @@ addEventListener("keydown", (event) => {
 		event.key == "0" ||
 		event.key == "."
 	) {
-		if (output.innerText == "0") {
-			output.innerText = event.key;
-		} else output.innerText += event.key;
+		if (output.innerText === "0") {
+			if (event.key === ".") {
+				output.innerText += event.key;
+				flagDec = 1;
+			} else output.innerText = event.key;
+		} else {
+			if (flagDec < 1 && event.key === ".") {
+				output.innerText += event.key;
+				flagDec = 1;
+			} else if (event.key !== ".") {
+				output.innerText += event.key;
+			}
+		}
 	} else if (
 		event.key == "+" ||
 		event.key == "-" ||
@@ -140,15 +164,20 @@ addEventListener("keydown", (event) => {
 			output.innerText = "";
 			flagOp++;
 			flagEval = 1;
+			flagDec = 0;
 		}
 	} else if (event.key == "Backspace") {
 		output.innerText = output.innerText.slice(0, output.innerText.length - 1);
+		if (output.innerText[output.innerText.length - 1] === ".") {
+			flagDec = 0;
+		}
 		if (output.innerText.length === 0) {
 			output.innerText = "0";
 		}
 	} else if (event.key == "c") {
 		output.innerText = "0";
 		mini.innerText = "";
+		flagEval = 0;
 	} else if ((event.key = "Enter")) {
 		if (flagEval < 2) {
 			mini.innerText = output.innerText + "=";
@@ -168,6 +197,7 @@ addEventListener("keydown", (event) => {
 			}
 			flagOp = 0;
 			flagEval++;
+			flagDec = 0;
 		}
 	}
 });

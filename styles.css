@@ -168,3 +168,48 @@ h1 {
 	scale: 1.03;
 	border: 2px solid rgb(43, 255, 0);
 }
+
+.red {
+	height: 20px;
+	width: 20px;
+	border: none;
+	border-radius: 50%;
+	background-color: red;
+	animation: changeR 2s infinite;
+}
+
+.green {
+	height: 20px;
+	width: 20px;
+	border: none;
+	border-radius: 50%;
+	background-color: green;
+	animation: changeG 2s infinite 0.75s;
+}
+
+.colored-btns {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	width: 100px;
+	position: absolute;
+	margin: 30px 20px;
+}
+
+@keyframes changeR {
+	from {
+		background-color: red;
+	}
+	to {
+		background-color: transparent;
+	}
+}
+
+@keyframes changeG {
+	from {
+		background-color: green;
+	}
+	to {
+		background-color: transparent;
+	}
+}

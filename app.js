@@ -76,6 +76,7 @@ let evaluate = document.querySelector(".evaluate");
 
 let a = 0;
 let b = 0;
+let o = 0;
 let operation;
 let flagOp = 0;
 ops.forEach((op) => {
@@ -86,6 +87,7 @@ ops.forEach((op) => {
 			a = parseFloat(output.innerText);
 			output.innerText = "0";
 			flagOp++;
+			o = op.innerText;
 			flagEval = 1;
 			flagDec = 0;
 		}
@@ -94,8 +96,8 @@ ops.forEach((op) => {
 
 evaluate.addEventListener("click", () => {
 	if (flagEval < 2) {
-		mini.innerText = output.innerText + "=";
 		b = parseFloat(output.innerText);
+		mini.innerText = `${a}` + `${o}` + `${b}` + "=";
 		if (operation == "+") {
 			output.innerText = add(a, b);
 		} else if (operation == "-") {
@@ -165,6 +167,7 @@ addEventListener("keydown", (event) => {
 			flagOp++;
 			flagEval = 1;
 			flagDec = 0;
+			o = operation;
 		}
 	} else if (event.key == "Backspace") {
 		output.innerText = output.innerText.slice(0, output.innerText.length - 1);
@@ -180,20 +183,21 @@ addEventListener("keydown", (event) => {
 		flagEval = 0;
 	} else if ((event.key = "Enter")) {
 		if (flagEval < 2) {
-			mini.innerText = output.innerText + "=";
-			b = parseFloat(output.innerText);
+			let Kb = 0; //Keyboard output was producing some side-effects with the original `b` variable so declared another variable `Kb`
+			Kb = parseFloat(output.innerText);
+			mini.innerText = `${a}` + `${o}` + `${Kb}` + "=";
 			if (operation == "+") {
-				output.innerText = add(a, b);
+				output.innerText = add(a, Kb);
 			} else if (operation == "-") {
-				output.innerText = subtract(a, b);
+				output.innerText = subtract(a, Kb);
 			} else if (operation == "*") {
-				output.innerText = multiply(a, b);
+				output.innerText = multiply(a, Kb);
 			} else if (operation == "/") {
-				output.innerText = divide(a, b);
+				output.innerText = divide(a, Kb);
 			} else if (operation == "^") {
-				output.innerText = power(a, b);
+				output.innerText = power(a, Kb);
 			} else if (operation == "√") {
-				output.innerText = root(b, a);
+				output.innerText = root(Kb, a);
 			}
 			flagOp = 0;
 			flagEval++;
